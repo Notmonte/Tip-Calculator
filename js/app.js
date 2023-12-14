@@ -27,7 +27,7 @@ let menuItems = [
         desc: 'fresh salmon spread and toast',
         imgUrl: 'salmon-dip.jpg',
         price: 10.99,
-        qty: 0
+        qty: 10
     },
     {
         id: 2,
@@ -61,7 +61,7 @@ let menuItems = [
         type: 'entrees',
         item: 'chicken sandwich',
         desc: 'breaded chicken breast on a bun with pickles and lettuce',
-        imgUrl: '',
+        imgUrl: 'chicken-sandwich.jpg',
         price: 12.99,
         qty: 0
     },
@@ -70,7 +70,7 @@ let menuItems = [
         type: 'entrees',
         item: 'waldorf salad',
         desc: 'bean veggie patty served with fries',
-        imgUrl: '',
+        imgUrl: 'salad.jpg',
         price: 12.99,
         qty: 0
     },
@@ -79,7 +79,7 @@ let menuItems = [
         type: 'entrees',
         item: 'salmon',
         desc: 'atlantic salmon surved over grits with a side os spinach',
-        imgUrl: '',
+        imgUrl: 'salmon.jpg',
         price: 15.99,
         qty: 0
     },
@@ -88,7 +88,7 @@ let menuItems = [
         type: 'entrees',
         item: 'pizza',
         desc: 'pepperoni and tomato pizza. 6 slices',
-        imgUrl: '',
+        imgUrl: 'pizza.jpg',
         price: 16.99,
         qty: 0
     },
@@ -97,16 +97,16 @@ let menuItems = [
         type: 'drinks',
         item: 'lemonade',
         desc: 'fresh squezed lemons',
-        imgUrl: '',
+        imgUrl: 'lemonade.jpg',
         price: 3.99,
         qtty: 0
     },
     {
         id: 10,
-        type: 'desserts',
-        item: 'lousiana crunch cake',
-        desc: 'a cake from a land afar with aa big crunch',
-        imgUrl: '',
+        type: 'drinks',
+        item: 'grape juice',
+        desc: 'fresh right from the source',
+        imgUrl: 'grape-juice.jpg',
         price: 4.99,
         qtty: 0
     },
@@ -115,7 +115,7 @@ let menuItems = [
         type: 'drinks',
         item: 'wine',
         desc: 'dealcoholized wine with a fresh taste',
-        imgUrl: '',
+        imgUrl: 'wine.jpg',
         price: 6.99,
         qtty: 0
     },
@@ -124,25 +124,25 @@ let menuItems = [
         type: 'drinks',
         item: 'energy drink',
         desc: 'oh no its a monster',
-        imgUrl: '',
+        imgUrl: 'energy-monster.jpg',
         price: 3.99,
         qtty: 0
     },
     {
         id: 13,
-        type: 'drinks',
-        item: 'grapes juice',
-        desc: 'freshly plucked right from the source',
-        imgUrl: '',
+        type: 'desserts',
+        item: 'lousiana crunch cake',
+        desc: 'a cake from a land afar with a big crunch',
+        imgUrl: 'crunch.jpg',
         price: 7.99,
         qtty: 0
     },
     {
         id: 14,
-        type: 'drinks',
-        item: 'apple juice',
-        desc: 'should keep the doctors away',
-        imgUrl: '',
+        type: 'desserts',
+        item: 'apple pie',
+        desc: 'no apple lives were lost in the process',
+        imgUrl: 'apple-pie.jpg',
         price: 2.99,
         qtty: 0
     },
@@ -151,20 +151,20 @@ let menuItems = [
         type: 'desserts',
         item: 'jelly',
         desc: 'jell-o thats absoulty bouncy for no reason',
-        imgUrl: '',
+        imgUrl: 'jelly.jpg',
         price: 3.99,
         qtty: 0
     },
     {
         id: 16,
-        type: 'entrees',
-        item: 'grilled teriyaki chicken',
-        desc: 'fresh nice robust scrumdiddlyumptious chicken',
-        imgUrl: '',
+        type: 'desserts',
+        item: 'air',
+        desc: 'fresh nice robust scrumdiddlyumptious air',
+        imgUrl: 'air.png',
         price: 6.99,
         qtty: 0
-    }
-]
+}]
+
 
 confirmBtn.addEventListener('click', (e)=> {
     e.preventDefault()
@@ -189,40 +189,37 @@ confirmBtn.addEventListener('click', (e)=> {
 
 // make receipt
 const makeReceipt =(obj, el)=> {
-    const listItem = document.createElement('li')
-    listItem.classList.add('receipt-item', 'd-flex', 'justify-content-between')
+    const tableRow = document.createElement('tr')
+    tableRow.classList.add('receipt-item', 'text-start')
 
-    const receiptChoice = document.createElement('span')
-    receiptChoice.classList.add('receipt-choice')
+    const receiptChoice = document.createElement('td')
+    receiptChoice.classList.add('receipt-choice', 'text-center')
     receiptChoice.innerText = obj.item
 
-    const receiptQty = document.createElement('span')
-    receiptQty.classList.add('receipt-qty')
+    const receiptQty = document.createElement('td')
+    receiptQty.classList.add('receipt-qty', 'text-center')
     receiptQty.setAttribute('id', `qty${obj.id}`)
     receiptQty.innerText = obj.qty
     
-    const receiptPrice = document.createElement('span')
-    receiptPrice.classList.add('receipt-price')
+    const receiptPrice = document.createElement('td')
+    receiptPrice.classList.add('receipt-price', 'text-center')
     receiptPrice.innerText = obj.price
 
-    const itemSubtotal = document.createElement('span')
-    itemSubtotal.classList.add('item-subtotal')
+    const itemSubtotal = document.createElement('td')
+    itemSubtotal.classList.add('item-subtotal', 'text-center')
     itemSubtotal.setAttribute('id', `subTotal${obj.id}`)
     itemSubtotal.innerText = obj.itemTotal
 
     
 
     
-    listItem.appendChild(receiptChoice)
-    listItem.appendChild(receiptQty)
-    listItem.appendChild(receiptPrice)
-    listItem.appendChild(itemSubtotal)
+    tableRow.appendChild(receiptChoice)
+    tableRow.appendChild(receiptQty)
+    tableRow.appendChild(receiptPrice)
+    tableRow.appendChild(itemSubtotal)
     
 
-    el.appendChild(listItem)
-
-    console.log(listItem)
-
+    el.appendChild(tableRow)
 }
 
 const updateReceipt =(obj, qty, itemTotal)=> {
@@ -273,10 +270,34 @@ menuItems.forEach(item => {
             <h4 class="card-title">${item.item}</h4>
             <p class="card-text">${item.desc}</p>
         </div>
-        <footer class="card-footer">
+    <footer class="card-footer">
         <p class"card-text item-price">${item.price}</p>
-            <button class="btn btn-danger cart-btn" id="Btn${item.id}" data-id="${item.id}" data-price="${item.price}" data-qty="${item.qty}" data-item="${item.item}">add to cart</button>
-        </footer>
+        <div class="button-div d-flex justify-content-around">
+            <button 
+                class="btn btn-danger cart-btn" 
+                id="Btn${item.id}" 
+                data-id="${item.id}" 
+                data-price="${item.price}" 
+                data-qty="${item.qty}" 
+                data-item="${item.item}">
+            add to cart</button>
+            <div class"qty-div>
+                <button 
+                class="btn btn-primary btn-subtract" 
+                id="btnSubtract${item.id}"
+                data-id="${item.id}"
+                data.qty="${item.qty}"
+                > - </button>
+                    <span class="quantity" id="quantity${item.id}">${item.qty}</span>
+                <button 
+                        class="btn btn-primary btn-add" 
+                        id="btnAdd${item.id}"
+                        data-id="${item.id}"
+                        data.qty="${item.qty}"
+                "> + </button>
+            </div>
+        </div>
+    </footer>
     `
 
     column.appendChild(card);
@@ -309,31 +330,87 @@ cartButtons.forEach(button => {
     let qty = parseFloat(button.getAttribute('data-qty'))
     const item = button.getAttribute('data-item')
     const id = parseFloat(button.getAttribute('data-id'))
+
     button.addEventListener('click', ()=> {
-        qty+=1
-        let itemObj = {
-            id: id,
-            item: item,
-            qty: qty,
-            price: price,
-            itemTotal: qty * price
+        let qty;
+        for (let i = 0; i < menuItems.length; i++) {
+            menuItems[i].id == id ? qty = menuItems[i].qty : null
         }
-
-        if (itemObj.qty == 1) {
-            receiptArray = [...receiptArray, itemObj]
-            makeReceipt(itemObj, receipt)
-
-        } else {
-            for (let i = 0; i < receiptArray.length; i++) {
-                if (receiptArray[i].id == id) {
-                    receiptArray[i].qty = itemObj.qty++
-                    receiptArray[i].itemTotal = receiptArray[i].qty * price
-                    updateReceipt( receiptArray[i], receiptArray[i].qty, receiptArray[i].itemTotal)
-                }
-            }
-        }
-
-        subtotal+=price
-        cartSubtotal.innerText = subtotal.toFixed(2)
+        console.log(qty);
+        addItems(price, qty, item, id)
     })
 })
+
+const addItems =(price, qty, item, id)=> {
+    
+    let itemObj = {
+        id,
+        item,
+        qty,
+        price,
+        itemTotal: qty * price
+    }
+
+    console.log(itemObj);
+    receiptArray = [...receiptArray, itemObj]
+    makeReceipt(itemObj, receipt)
+
+    if (itemObj.qty == 1) {
+        receiptArray = [...receiptArray, itemObj]
+        makeReceipt(itemObj, receipt)
+        console.log(itemObj);
+    } else {
+        for (let i = 0; i < receiptArray.length; i++) {
+            if (receiptArray[i].id === id) {
+                receiptArray[i].qty = itemObj.qty++
+                receiptArray[i].itemTotal = receiptArray[i].qty * price
+                updateReceipt(receiptArray[i], receiptArray[i].qty, receiptArray[i].itemTotal)
+            }
+        }
+    }
+
+    subtotal+= price
+    cartSubtotal.innerText = subtotal.toFixed(2)
+}
+const btnSubtract = document.querySelectorAll('.btn-subtract')
+const btnAdd = document.querySelectorAll('.btn-add')
+const jelly = menuItems[15]
+
+btnSubtract.forEach(button => {
+
+    button.addEventListener('click', ()=> {
+        // const btnQty = parseFloat(button.getAttribute('data-qty')) 
+        const btnId = parseFloat(button.getAttribute('data-id'))
+        const spanQty = document.getElementById(`quantity${btnId}`)
+        
+        for (let i = 0; i < menuItems.length; i++) {
+            if(menuItems[i].id == btnId && menuItems[i].qty > 0) {
+                menuItems[i].qty-=1
+                spanQty.innerText = menuItems[i].qty
+            }
+        }
+        if (menuItems[i].id == 15) {
+            console.log(jelly.qty)
+        }
+    })
+})
+
+console.log(cartButtons[12].dataset.qty)
+
+btnAdd.forEach(button => {
+    console.log(button);
+    button.addEventListener('click', ()=> {
+        const btnQty = parseFloat(button.getAttribute('data-qty'))
+        const btnId = parseFloat(button.getAttribute('data-id'))
+        const spanQty = document.getElementById(`quantity${btnId}`)
+        
+        for (let i = 0; i < menuItems.length; i++) {
+            if(menuItems[i].id == btnId && menuItems[i].qty < 20 && cartButtons[i].dataset.id == btnId) {
+                menuItems[i].qty+=1
+                cartButtons[i].setAttribute('data-qty', menuItems[i].qty)
+                spanQty.innerText = menuItems[i].qty
+            }
+        }
+    })
+})
+
